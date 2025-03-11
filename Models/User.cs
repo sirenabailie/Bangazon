@@ -11,6 +11,7 @@ namespace Bangazon.Models
         public string Email { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+        public string Image {  get; set; }
         public int Zip { get; set; }
         public bool IsSeller { get; set; }
     }

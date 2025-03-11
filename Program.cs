@@ -250,4 +250,18 @@ app.MapPut("/api/customers/profile", (BangazonDbContext db, HttpContext httpCont
     return Results.NoContent();
 });
 
+// Get user by UID
+app.MapGet("/api/users/{uid}", (BangazonDbContext db, string uid) =>
+{
+    User user = db.Users.SingleOrDefault(u => u.Uid == uid);
+
+    if (user == null)
+    {
+        return Results.NotFound("There are no users matching.");
+    }
+
+    return Results.Ok(user);
+});
+
+
 app.Run();

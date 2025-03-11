@@ -21,24 +21,48 @@ public class BangazonDbContext : DbContext
     {
         modelBuilder.Entity<User>().HasData(new User[]
         {
-            new User { Id = 1, Uid = "yZ123AbC456DeFgHijKlmN789Opq", FirstName = "Sirena", LastName = "Foster", Email = "sirena@example.com", Address = "123 Main St", City = "Nashville", Zip = 37209, IsSeller = true },
-            new User { Id = 2, Uid = "aBcD987xYz654wVuTsQrMnOpL321Gh", FirstName = "Steven", LastName = "Robinson", Email = "steven@example.com", Address = "456 Elm St", City = "Knoxville", Zip = 37920, IsSeller = false }
+            new User 
+            { 
+                Id = 1, 
+                Uid = "c7O2PDuPP4XuAIeGC24V9LE64IJ3", 
+                FirstName = "Sirena", 
+                LastName = "Foster", 
+                Email = "sirena@example.com", 
+                Address = "123 Main St", 
+                City = "Nashville", 
+                Zip = 37209, 
+                IsSeller = true, 
+                Image = "https://example.com/images/sirena.jpg" // ✅ New Image Field
+            },
+            new User 
+            { 
+                Id = 2, 
+                Uid = "aBcD987xYz654wVuTsQrMnOpL321Gh", 
+                FirstName = "Steven", 
+                LastName = "Robinson", 
+                Email = "steven@example.com", 
+                Address = "456 Elm St", 
+                City = "Knoxville", 
+                Zip = 37920, 
+                IsSeller = false, 
+                Image = "https://example.com/images/steven.jpg" // ✅ New Image Field
+            }
         });
 
         modelBuilder.Entity<Customer>().HasData(new Customer[]
         {
-            new Customer { Id = 1, UserId = "yZ123AbC456DeFgHijKlmN789Opq" },
-            new Customer { Id = 2, UserId = "aBcD987xYz654wVuTsQrMnOpL321Gh" } // Steven Robinson
+            new Customer { Id = 1, UserId = "c7O2PDuPP4XuAIeGC24V9LE64IJ3" },
+            new Customer { Id = 2, UserId = "aBcD987xYz654wVuTsQrMnOpL321Gh" }
         });
 
         modelBuilder.Entity<Seller>().HasData(new Seller[]
         {
-            new Seller { Id = 1, StoreId = 1, SellerId = "yZ123AbC456DeFgHijKlmN789Opq" } // Sirena Foster
+            new Seller { Id = 1, StoreId = 1, SellerId = "c7O2PDuPP4XuAIeGC24V9LE64IJ3" }
         });
 
         modelBuilder.Entity<Store>().HasData(new Store[]
         {
-            new Store { Id = 1, Name = "E-Lit", SellerId = "yZ123AbC456DeFgHijKlmN789Opq" } // Store owned by Sirena
+            new Store { Id = 1, Name = "E-Lit", SellerId = "c7O2PDuPP4XuAIeGC24V9LE64IJ3" }
         });
 
         modelBuilder.Entity<Category>().HasData(new Category[]
@@ -61,7 +85,7 @@ public class BangazonDbContext : DbContext
         modelBuilder.Entity<PaymentType>().HasData(new PaymentType[]
         {
             new PaymentType { Id = 1, Type = "Credit Card", CustomerId = "aBcD987xYz654wVuTsQrMnOpL321Gh" },
-            new PaymentType { Id = 2, Type = "PayPal", CustomerId = "yZ123AbC456DeFgHijKlmN789Opq" }
+            new PaymentType { Id = 2, Type = "PayPal", CustomerId = "c7O2PDuPP4XuAIeGC24V9LE64IJ3" }
         });
 
         modelBuilder.Entity<Order>().HasData(new Order[]
