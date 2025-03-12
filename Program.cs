@@ -263,5 +263,19 @@ app.MapGet("/api/users/{uid}", (BangazonDbContext db, string uid) =>
     return Results.Ok(user);
 });
 
+app.MapPost("/api/users/register", async (BangazonDbContext db, User newUser) =>
+{
+    if (await db.Users.AnyAsync(u => u.Uid == newUser.Uid))
+    {
+        return Results.BadRequest("User already exists.");
+    }
+
+    db.Users.Add(newUser);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/api/users/{newUser.Uid}", newUser);
+});
+
+
 
 app.Run();
