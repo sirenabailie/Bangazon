@@ -265,17 +265,35 @@ app.MapGet("/api/users/{uid}", (BangazonDbContext db, string uid) =>
 
 app.MapPost("/api/users/register", async (BangazonDbContext db, User newUser) =>
 {
+    if (newUser == null)
+    {
+        Console.WriteLine("❌ Invalid request body received.");
+        return Results.BadRequest("Invalid request body");
+    }
+
+    Console.WriteLine($"🔹 Incoming Registration Data: {System.Text.Json.JsonSerializer.Serialize(newUser)}");
+
     if (await db.Users.AnyAsync(u => u.Uid == newUser.Uid))
     {
+        Console.WriteLine("⚠️ User already exists.");
         return Results.BadRequest("User already exists.");
     }
 
     db.Users.Add(newUser);
     await db.SaveChangesAsync();
 
+    Console.WriteLine("✅ User registered successfully.");
     return Results.Created($"/api/users/{newUser.Uid}", newUser);
 });
 
+
+
+// Check if user exists by UID
+app.MapGet("/api/checkuser/{uid}", (BangazonDbContext db, string uid) =>
+{
+    var userExists = db.Users.Any(u => u.Uid == uid);
+    return userExists ? Results.Ok(new { exists = true }) : Results.NotFound();
+});
 
 
 app.Run();
